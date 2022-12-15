@@ -3,8 +3,6 @@ import DefaultPicture from '../../assets/profile.png';
 import styled from "styled-components";
 import colors from './../../utils/style/colors';
 
-function Card ({ label, title, picture }) {
-
     const CardLabel = styled.span`
         color: ${colors.primary};
         margin: 20px;
@@ -42,6 +40,8 @@ function Card ({ label, title, picture }) {
             box-shadow: 2px 2px 10px #e2e3e9;
         }
     `;
+
+function Card ({ label, title, picture }) {
 
     return (
         <CardWrapper>

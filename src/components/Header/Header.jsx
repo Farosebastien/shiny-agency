@@ -3,13 +3,11 @@ import styled from "styled-components";
 import colors from './../../utils/style/colors';
 import logo from "../../assets/dark-logo.png";
 
-function Header () {
-
-    const StyledNav = styled.nav`
+    const HeaderNav = styled.nav`
         margin: 50px;
     `;
 
-    const StyledLink = styled(Link)`
+    const HeaderLink = styled(Link)`
         padding: 10px 40px ;
         color: ${colors.secondary};
         text-decoration: none;
@@ -19,7 +17,7 @@ function Header () {
             `color: white; border-radius: 30px; background-color: ${colors.primary};`}
     `;
 
-    const Styledimg = styled.img`
+    const Headerimg = styled.img`
         width: 200px;
         height: 70px;
         margin: 30px;
@@ -31,14 +29,16 @@ function Header () {
         justify-content: space-between;
     `;
 
+function Header () {
+
     return (
         <StyledHeader>
-            <Styledimg src={logo} alt="logo de shiny-agency" />
-            <StyledNav>
-                <StyledLink to="/">Accueil</StyledLink>
-                <StyledLink to="/Freelances">Profils</StyledLink>
-                <StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
-            </StyledNav>
+            <Headerimg src={logo} alt="logo de shiny-agency" />
+            <HeaderNav>
+                <HeaderLink to="/">Accueil</HeaderLink>
+                <HeaderLink to="/Freelances">Profils</HeaderLink>
+                <HeaderLink to="/survey/1" $isFullLink>Faire le test</HeaderLink>
+            </HeaderNav>
         </StyledHeader>
         
     )

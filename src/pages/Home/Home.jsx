@@ -3,7 +3,7 @@ import colors from "../../utils/style/colors";
 import { Link } from "react-router-dom";
 import homeImage from "../../assets/home-illustration.svg";
 
-const StyledLink = styled(Link)`
+const HomeLink = styled(Link)`
         padding: 10px 80px ;
         color: ${colors.secondary};
         text-decoration: none;
@@ -13,7 +13,7 @@ const StyledLink = styled(Link)`
             `color: white; border-radius: 30px; background-color: ${colors.primary};`}
     `;
 
-const StyledSection = styled.section`
+const HomeSection = styled.section`
   background-color: ${colors.backgroundLight};
   display: flex;
   flex-direction: row;
@@ -23,12 +23,12 @@ const StyledSection = styled.section`
   height: 645px;
 `;
 
-const StyledTitle = styled.h1`
+const HomeTitle = styled.h1`
   font-size: 46px;
   line-height: 160.5%;
 `
 
-const StyledAside = styled.aside`
+const HomeAside = styled.aside`
   display: flex;
   width: 45%;
   flex-direction: column;
@@ -36,22 +36,22 @@ const StyledAside = styled.aside`
   margin: 30px;
 `;
 
-const StyledImg = styled.img`
+const HomeImg = styled.img`
   width: 400px;
   margin: 30px
 `;
 
 function Home() {
   return (
-    <StyledSection>
-      <StyledAside>
-        <StyledTitle>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</StyledTitle>
-        <StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
-      </StyledAside>
+    <HomeSection>
+      <HomeAside>
+        <HomeTitle>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</HomeTitle>
+        <HomeLink to="/survey/1" $isFullLink>Faire le test</HomeLink>
+      </HomeAside>
       <aside>
-        <StyledImg src={homeImage} alt="image page d'accueil" />
+        <HomeImg src={homeImage} alt="image page d'accueil" />
       </aside>
-    </StyledSection>
+    </HomeSection>
   );
 }
 
