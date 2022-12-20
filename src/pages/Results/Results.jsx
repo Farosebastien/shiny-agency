@@ -5,6 +5,7 @@ import { useFetch } from './../../utils/hooks/Hooks';
 import { Loader, StyledLink } from '../../utils/Atoms';
 import colors from '../../utils/style/colors';
 import styled from 'styled-components';
+import EmptyList from '../../components/EmptyList/EmptyList';
 
 const ResultsContainer = styled.div`
   display: flex;
@@ -53,13 +54,20 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `;
 
-function formatQueryParams (answers) {
+export function formatQueryParams (answers) {
     const answerNumbers = Object.keys(answers);
     return answerNumbers.reduce((previousParams, answerNumber, index) => {
         const isFirstAnswer = index === 0;
         const separator = isFirstAnswer ? '': '&';
         return `${previousParams}${separator}a${answerNumber}=${answers[answerNumber]}`
     }, '');
+}
+
+export function formatJobList (title, listLength, index) {
+  if(index === listLength-1) {
+    return title;
+  }
+  return `${title},`;
 }
 
 function Results () {
@@ -70,11 +78,15 @@ function Results () {
     const { data, isLoading, error } = useFetch(`http://localhost:8000/results?${fetchParams}`);
 
     if (error) return <span>oups, il y a eu un problème!</span>;
-    const resultsData = data?.resultData;
+    const resultsData = data?.resultsData;
+
+    if (resultsData?.length < 1) {
+      return <EmptyList theme={theme} />
+    }
 
     return isLoading ? (
         <LoaderWrapper>
-          <Loader />
+          <Loader data-testid="loader" />
         </LoaderWrapper>
       ) : (
         <ResultsContainer theme={theme}>
@@ -86,8 +98,7 @@ function Results () {
                   key={`result-title-${index}-${result.title}`}
                   theme={theme}
                 >
-                  {result.title}
-                  {index === resultsData.length - 1 ? '' : ','}
+                  {formatJobList(result.title, resultsData.length, index)}
                 </JobTitle>
               ))}
           </ResultsTitle>
@@ -97,12 +108,9 @@ function Results () {
           <DescriptionWrapper>
             {resultsData &&
               resultsData.map((result, index) => (
-                <JobDescription
-                  theme={theme}
-                  key={`result-detail-${index}-${result.title}`}
-                >
-                  <JobTitle theme={theme}>{result.title}</JobTitle>
-                  <p>{result.description}</p>
+                <JobDescription theme={theme} key={`result-detail-${index}-${result.title}`}>
+                  <JobTitle theme={theme} data-testid="job-title">{result.title}</JobTitle>
+                  <p data-testid="job-description">{result.description}</p>
                 </JobDescription>
               ))}
           </DescriptionWrapper>

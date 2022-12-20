@@ -1,17 +1,8 @@
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
-import { Link } from "react-router-dom";
+import { StyledLink } from "../../utils/Atoms";
+import { useTheme } from "../../utils/hooks/Hooks";
 import homeImage from "../../assets/home-illustration.svg";
-
-const HomeLink = styled(Link)`
-        padding: 10px 80px ;
-        color: ${colors.secondary};
-        text-decoration: none;
-        font-size: 18px;
-        ${(props) => 
-            props.$isFullLink && 
-            `color: white; border-radius: 30px; background-color: ${colors.primary};`}
-    `;
 
 const HomeSection = styled.section`
   background-color: ${colors.backgroundLight};
@@ -42,11 +33,14 @@ const HomeImg = styled.img`
 `;
 
 function Home() {
+
+  const theme = useTheme();
+
   return (
     <HomeSection>
-      <HomeAside>
-        <HomeTitle>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</HomeTitle>
-        <HomeLink to="/survey/1" $isFullLink>Faire le test</HomeLink>
+      <HomeAside theme={theme}>
+        <HomeTitle theme={theme}>Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents</HomeTitle>
+        <StyledLink to="/survey/1" $isFullLink>Faire le test</StyledLink>
       </HomeAside>
       <aside>
         <HomeImg src={homeImage} alt="image page d'accueil" />
